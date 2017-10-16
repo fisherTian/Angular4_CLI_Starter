@@ -3,7 +3,15 @@ import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { AppComponent } from './app.component';
+import { InterceptorService } from 'ng2-interceptors';
+import { ServerURLInterceptor } from './core/http.interceptor';
+import { HttpModule,XHRBackend, RequestOptions } from '@angular/http';
 
+export function interceptorFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions, serverURLInterceptor:ServerURLInterceptor){
+  let service = new InterceptorService(xhrBackend, requestOptions);
+  service.addInterceptor(serverURLInterceptor);
+  return service;
+}
 
 // Import containers
 import {
@@ -68,7 +76,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     AppRoutingModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    HttpModule
   ],
   declarations: [
     AppComponent,
@@ -76,7 +85,12 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     ...APP_COMPONENTS,
     ...APP_DIRECTIVES
   ],
-  providers: [
+  providers: [ServerURLInterceptor,
+    {
+      provide: InterceptorService,
+      useFactory: interceptorFactory,
+      deps: [XHRBackend, RequestOptions, ServerURLInterceptor]
+    },
     {
     provide: LocationStrategy,
     useClass: HashLocationStrategy
