@@ -3,8 +3,7 @@ import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { AppComponent } from './app.component';
-import { HeroService } from './views/dashboard/testService';
-import { silentLogger } from './views/dashboard/testService';
+
 
 // Import containers
 import {
@@ -77,7 +76,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     ...APP_COMPONENTS,
     ...APP_DIRECTIVES
   ],
-  providers: [HeroService,
+  providers: [
     {
     provide: LocationStrategy,
     useClass: HashLocationStrategy
