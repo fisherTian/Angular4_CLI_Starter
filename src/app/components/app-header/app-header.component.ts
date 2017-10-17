@@ -6,7 +6,7 @@ import { Router} from '@angular/router';
 })
 export class AppHeader {
 
-  admin={};
+  admin={name:''};
 
   constructor(private el: ElementRef,private router:Router) { }
 

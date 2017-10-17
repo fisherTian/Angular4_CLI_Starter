@@ -4,8 +4,8 @@
   <button class="navbar-toggler d-md-down-none mr-auto" type="button" appSidebarToggler>&#9776;</button>
   <!--<button class="navbar-toggler d-md-down-none" type="button" appAsideMenuToggler>&#9776;</button>-->
 
-  <ul class="nav navbar-nav ml-auto">
-    <li class="nav-item dropdown" dropdown (onToggle)="toggled($event)">
+  <ul class="nav navbar-nav ml-auto" style="margin-right: 20px;">
+    <li class="nav-item dropdown" dropdown >
       <a href class="nav-link dropdown-toggle" dropdownToggle (click)="false">
         <img src="assets/img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
         <span class="d-md-down-none">{{admin.name}}</span>

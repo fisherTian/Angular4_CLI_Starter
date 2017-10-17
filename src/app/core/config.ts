@@ -1,7 +1,6 @@
 export const config = {
    menu :[
      {
-       active:'active',
        name:'测试用',
        url:'/dashboard',
        icon:'icon-speedometer'
