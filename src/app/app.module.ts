@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-
+import { LoginComponent } from './views/login/login.component';
 import { AppComponent } from './app.component';
 import { InterceptorService } from 'ng2-interceptors';
 import { ServerURLInterceptor } from './core/http.interceptor';
 import { HttpModule,XHRBackend, RequestOptions } from '@angular/http';
-
+import { FormsModule } from '@angular/forms';
 export function interceptorFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions, serverURLInterceptor:ServerURLInterceptor){
   let service = new InterceptorService(xhrBackend, requestOptions);
   service.addInterceptor(serverURLInterceptor);
@@ -77,10 +77,12 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   declarations: [
     AppComponent,
+    LoginComponent,
     ...APP_CONTAINERS,
     ...APP_COMPONENTS,
     ...APP_DIRECTIVES

@@ -4,11 +4,21 @@
   <nav class="sidebar-nav">
     <ul class="nav">
       <li class="nav-title">
-        Dashboard
+        菜单
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" [routerLink]="['/dashboard']"><i class="icon-speedometer"></i> Dashboard <span class="badge badge-info">NEW</span></a>
+      <div *ngFor="let item of menuList">
+      <li class="nav-item" *ngIf="item.children == null">
+        <a class="nav-link" [ngClass]="{active: item.active}" [routerLink]="[item.url]"><i [ngClass]="item.icon"></i> {{item.name}} </a>
       </li>
+      <li class="nav-item nav-dropdown" routerLinkActive="open" appNavDropdown *ngIf="item.children != null">
+        <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle><i [ngClass]="item.icon"></i> {{item.name}}</a>
+        <ul class="nav-dropdown-items">
+          <li class="nav-item" *ngFor="let it of item.children">
+            <a class="nav-link" [ngClass]="{active: item.active}" [routerLink]="[it.url]"><i [ngClass]="it.icon"></i> {{it.name}}</a>
+          </li>
+        </ul>
+      </li>
+      </div>
     </ul>
   </nav>
   <app-sidebar-footer></app-sidebar-footer>

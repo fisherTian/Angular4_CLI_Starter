@@ -1,10 +1,12 @@
 import { Component, ElementRef } from '@angular/core';
-
+import { config } from './../../core/config';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './app-sidebar.component.html'
 })
 export class AppSidebar {
+
+  menuList = [];
 
   constructor(private el: ElementRef) { }
 
@@ -18,5 +20,8 @@ export class AppSidebar {
     }
     // remove the empty element(the host)
     parentElement.removeChild(nativeElement);
+
+    this.menuList = config.menu;
+
   }
 }

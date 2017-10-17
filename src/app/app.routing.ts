@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
+import { LoginComponent } from './views/login/login.component';
 // Import Containers
 import {
   FullLayout,
@@ -17,7 +17,7 @@ export const routes: Routes = [
     path: '',
     component: FullLayout,
     data: {
-      title: 'Home'
+      title: '主页'
     },
     children: [
       {
@@ -25,6 +25,10 @@ export const routes: Routes = [
         loadChildren: './views/dashboard/dashboard.module#DashboardModule'
       }
     ]
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
 ];
 

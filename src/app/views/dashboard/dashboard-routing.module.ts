@@ -9,7 +9,7 @@ const routes: Routes = [
     path: '',
     component: DashboardComponent,
     data: {
-      title: 'Dashboard'
+      title: '测试专用'
     }
   }
 ];
