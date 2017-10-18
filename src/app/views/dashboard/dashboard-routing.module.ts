@@ -9,7 +9,7 @@ const routes: Routes = [
     path: '',
     component: DashboardComponent,
     data: {
-      title: '测试专用'
+      title: '资金概览'
     }
   }
 ];

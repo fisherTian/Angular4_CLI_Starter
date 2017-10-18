@@ -1,10 +1,20 @@
 export const config = {
    menu :[
      {
-       name:'测试用',
+       name:'资金概览',
        url:'/dashboard',
        icon:'icon-speedometer'
      },
+     {
+       name:'举报管理',
+       url:'/against',
+       icon:'icon-puzzle'
+     },
+     {
+       name:'用户管理',
+       url:'/user',
+       icon:'icon-star'
+     }/*,
      {
        name:'用户管理',
        icon:'icon-star',
@@ -15,6 +25,6 @@ export const config = {
            icon:'icon-star'
          }
        ]
-     }
+     }*/
    ]
 }

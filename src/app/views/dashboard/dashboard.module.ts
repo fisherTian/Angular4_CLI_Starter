@@ -1,14 +1,14 @@
 import { NgModule,OnInit } from '@angular/core';
-import { ChartsModule } from 'ng2-charts/ng2-charts';
-
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
-
+import { AngularEchartsModule } from 'ngx-echarts';
+import { DashBoardService } from './dashboard.service';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   imports: [
-    DashboardRoutingModule,
-    ChartsModule
+    DashboardRoutingModule,AngularEchartsModule,FormsModule
   ],
-  declarations: [ DashboardComponent ]
+  declarations: [ DashboardComponent],
+  providers:[DashBoardService]
 })
 export class DashboardModule{}

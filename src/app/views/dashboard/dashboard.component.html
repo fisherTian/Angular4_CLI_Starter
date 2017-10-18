@@ -1,3 +1,79 @@
 <div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+      <div class="card">
+        <div class="card-header">
+          基本账户
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-6 col-md-6">
+              <small class="text-muted text-uppercase font-weight-bold">余额</small>
+              <div class="mt10"><span class="h4 mb-0">{{accountTotal}}</span><small class="text-muted text-uppercase font-weight-bold">&nbsp;&nbsp;元</small></div>
+              <div class="mt10">
+                <button type="button" class="btn btn-success btn-sm">充值详情</button>
+                &nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-primary btn-sm">提现详情</button>
+                &nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-danger btn-sm">返现详情</button>
+              </div>
+            </div>
 
+            <div class="col-sm-6 col-md-6">
+              <small class="text-muted text-uppercase font-weight-bold">今日净增</small>
+              <div class="mt10"><span class="h4 mb-0">{{todayBalance}}</span><small class="text-muted text-uppercase font-weight-bold">&nbsp;&nbsp;元</small></div>
+              <div class="mt15">
+                  今日充值&nbsp;&nbsp;<span class="text-success">{{todayIncome}}</span>&nbsp;&nbsp;元
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  今日提现&nbsp;&nbsp;<span class="text-danger">{{todaySpend}}</span>&nbsp;&nbsp;元
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+      <div class="card">
+        <div class="card-header">
+          充值提现统计
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12 col-md-12">
+              <div class="col-lg-12 text-right">
+                <select name="select" class="form-control pull-right" style="width: 160px;" [ngModel]="type" (ngModelChange)="type=$event;initChart();">
+                  <option value="00">最近一周</option>
+                  <option value="01">最近一月</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-6">
+              <div echarts [options]="HxtOption" style="height:300px;"></div>
+            </div>
+
+            <div class="col-sm-6 col-md-6">
+              <small class="text-muted text-uppercase font-weight-bold">数据视图</small>
+              <div class="mt10"><small class="text-muted text-uppercase font-weight-bold">净增&nbsp;&nbsp;</small><span class="h4 mb-0">{{totalBalance}}</span><small class="text-muted text-uppercase font-weight-bold">&nbsp;&nbsp;元</small></div>
+              <div class="mt15">
+                充值&nbsp;&nbsp;<span class="text-success">{{totalIncome}}</span>&nbsp;&nbsp;元
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                提现&nbsp;&nbsp;<span class="text-danger">{{totalSpend}}</span>&nbsp;&nbsp;元
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-12">
+              <div echarts [options]="Sztoption" style="height:300px;"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

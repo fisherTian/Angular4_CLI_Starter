@@ -27,6 +27,10 @@ export const routes: Routes = [
       {
         path: 'user',
         loadChildren: './views/user/user.module#UserModule'
+      },
+      {
+        path: 'against',
+        loadChildren: './views/against/against.module#AgainstModule'
       }
     ]
   },
