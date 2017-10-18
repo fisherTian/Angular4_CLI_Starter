@@ -6,17 +6,26 @@ import { AgainstService } from './against.service';
 })
 export class AgainstComponent implements OnInit{
 
-  userList = [];
+  againstList = [];
   page: number = 1;
   total: number;
-  query:string;
+  status:string='';
 
   constructor(private againstService:AgainstService) { }
 
-  getUserList=function(){
-    this.againstService.get({currentPage:this.page,keyword:this.query}).then(res =>{
+  config:any = {
+    inSelector:"fallDown",
+    outSelector:"rollOut",
+    title:"angular2 layer",
+    align:"top",
+    parent: this,
+    closeAble: false
+  }
+
+  getAgainstList=function(){
+    this.againstService.get({currentPage:this.page,status:this.status}).then(res =>{
       if(res.code == 200){
-        this.userList = res.data;
+        this.againstList = res.data;
         this.total = res.totalItems;
       }
     })
@@ -24,11 +33,11 @@ export class AgainstComponent implements OnInit{
 
   pageChanged=function(page: number){
     this.page=page;
-    this.getUserList();
+    this.getAgainstList();
 }
 
   ngOnInit(): void {
-    this.getUserList();
+    this.getAgainstList();
   };
 
 
