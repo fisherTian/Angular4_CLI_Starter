@@ -13,4 +13,11 @@ export class AgainstService {
       .then(response => response.json())
       .catch((error:any) => Promise.reject(error.message || error));
   }
+
+  public updateStatus(params) {
+    return this.http.post(environment.API_URL+'/against/updateStatus',GoodUtils.parseParams(params))
+      .toPromise()
+      .then(response => response.json())
+      .catch((error:any) => Promise.reject(error.message || error));
+  }
 }

@@ -1,5 +1,6 @@
-import { Component,OnInit,Input } from '@angular/core';
+import { Component,OnInit,Input,ViewChild,ElementRef } from '@angular/core';
 import { AgainstService } from './against.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   templateUrl: 'against.component.html',
   providers:[AgainstService]
@@ -10,17 +11,12 @@ export class AgainstComponent implements OnInit{
   page: number = 1;
   total: number;
   status:string='';
+  @ViewChild('confirmModal')
+  confirmModal: ElementRef;
+  selectedItem;
 
-  constructor(private againstService:AgainstService) { }
+  constructor(private againstService:AgainstService,private toastr:ToastrService) { }
 
-  config:any = {
-    inSelector:"fallDown",
-    outSelector:"rollOut",
-    title:"angular2 layer",
-    align:"top",
-    parent: this,
-    closeAble: false
-  }
 
   getAgainstList=function(){
     this.againstService.get({currentPage:this.page,status:this.status}).then(res =>{
@@ -40,6 +36,15 @@ export class AgainstComponent implements OnInit{
     this.getAgainstList();
   };
 
-
+  changeStatus = function(){
+    this.againstService.updateStatus({status:this.selectedItem.status == '00'?'01':'00',id:this.selectedItem.id}).then(res =>{
+      if(res.code ==200 &&res.data){
+        this.getAgainstList();
+        this.toastr.success('修改成功!', '提示');
+      }else{
+        this.toastr.error('修改失败!', '提示');
+      };
+    })
+  }
 
 }

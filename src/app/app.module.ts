@@ -7,6 +7,9 @@ import { InterceptorService } from 'ng2-interceptors';
 import { ServerURLInterceptor } from './core/http.interceptor';
 import { HttpModule,XHRBackend, RequestOptions } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrService } from 'ngx-toastr';
 export function interceptorFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions, serverURLInterceptor:ServerURLInterceptor){
   let service = new InterceptorService(xhrBackend, requestOptions);
   service.addInterceptor(serverURLInterceptor);
@@ -76,7 +79,9 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     HttpModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   declarations: [
     AppComponent,
@@ -85,7 +90,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     ...APP_COMPONENTS,
     ...APP_DIRECTIVES
   ],
-  providers: [ServerURLInterceptor,
+  providers: [ServerURLInterceptor,ToastrService,
     {
       provide: InterceptorService,
       useFactory: interceptorFactory,
