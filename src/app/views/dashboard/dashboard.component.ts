@@ -17,7 +17,6 @@ export class DashboardComponent implements OnInit{
 
   initAccountInfo=function () {
     this.dashBoardService.getAccount().then(res =>{
-      console.log(res);
       this.accountTotal = res.accountTotal;
       this.todayIncome = res.todayIncome;
       this.todaySpend = res.todaySpend;
@@ -27,7 +26,6 @@ export class DashboardComponent implements OnInit{
 
   initChart = function () {
     this.dashBoardService.getChart(this.type).then(res =>{
-      console.log(res);
       this.totalIncome = res.totalIncome;
       this.totalSpend = res.totalSpend;
       this.totalBalance = res.totalBalance;

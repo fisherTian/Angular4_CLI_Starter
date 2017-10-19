@@ -31,6 +31,10 @@ export const routes: Routes = [
       {
         path: 'against',
         loadChildren: './views/against/against.module#AgainstModule'
+      },
+      {
+        path: 'redpacket',
+        loadChildren: './views/redpacket/redpacket.module#RedpacketModule'
       }
     ]
   },

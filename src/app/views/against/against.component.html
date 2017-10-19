@@ -42,8 +42,8 @@
               <td>{{item.phone}}</td>
               <td>{{item.createTime | date:'yyyy-MM-dd hh:mm'}}</td>
               <td >
-                <span *ngIf="item.status == '01'" class="badge badge-success curpointer" (click)="confirmModal.show();selectedItem = item;">已处理</span>
-                <span *ngIf="item.status == '00'" class="badge badge-danger curpointer" (click)="confirmModal.show();selectedItem = item;">未处理</span>
+                <span *ngIf="item.status == '01'" class="badge badge-success curpointer" (click)="changeStatus(item.id,'00');">已处理</span>
+                <span *ngIf="item.status == '00'" class="badge badge-danger curpointer" (click)="changeStatus(item.id,'01');">未处理</span>
               </td>
             </tr>
             </tbody>
@@ -62,24 +62,4 @@
     </div>
   </div>
 </div>
-
-<div bsModal #confirmModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-info" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">确认框</h4>
-        <button type="button" class="close" (click)="confirmModal.hide()" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>确认更改状态？</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="changeStatus();confirmModal.hide();">确认</button>
-        <button type="button" class="btn btn-secondary" (click)="confirmModal.hide()">关闭</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
+<ngx-confirm></ngx-confirm>

@@ -14,17 +14,22 @@ export const config = {
        name:'用户管理',
        url:'/user',
        icon:'icon-star'
-     }/*,
+     },
      {
-       name:'用户管理',
-       icon:'icon-star',
+       name:'红包管理',
+       icon:'icon-calculator',
        children:[
          {
-           name:'用户列表',
-           url:'/user/list',
-           icon:'icon-star'
+           name:'热潮包列表',
+           url:'/redpacket/list'
+           /*icon:'icon-calculator'*/
+         },
+         {
+           name:'订单列表',
+           url:'/redpacket/order'
+           /*icon:'icon-calculator'*/
          }
        ]
-     }*/
+     }
    ]
 }
