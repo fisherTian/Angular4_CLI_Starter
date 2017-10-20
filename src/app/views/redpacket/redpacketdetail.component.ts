@@ -40,7 +40,11 @@ export class RedpacketDetailComponent implements OnInit{
   };
 
   viewJson=function(json){
+    let _json = "{}";
+    if(json!=null)_json = JSON.stringify(JSON.parse(json),null,4);
+    this.ngxCodemirrorModalService.confirm({ message: _json, onAccept: () => {
 
+    }});
   }
 
 }

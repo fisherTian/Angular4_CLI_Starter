@@ -28,6 +28,7 @@ export class CodeMirrorDirective implements OnInit, OnChanges {
     if (this.editorRef) {
       if (changes.content) {
         this.editorRef.setValue(this.content);
+       // this.editorRef.refresh();
       }
       if (changes.config) {
         Object.keys(this.config).map(k => this.editorRef.setOption(k, this.config[k]));

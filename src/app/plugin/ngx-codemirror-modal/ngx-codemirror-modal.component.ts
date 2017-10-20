@@ -7,7 +7,7 @@ import { BsModalService, BsModalRef } from "ngx-bootstrap";
   selector: "ngx-codemirror-modal",
   template: `
     <div bsModal #codemirrorModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="codemirrorModal" aria-hidden="true">
-    <div class="modal-dialog modal-info modal-sm">
+    <div class="modal-dialog modal-info">
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title pull-left">数据详情</h4>
@@ -16,7 +16,7 @@ import { BsModalService, BsModalRef } from "ngx-bootstrap";
           </button>
         </div>
         <div class="modal-body">
-          <textarea codemirror [content]="codemirrorValue"></textarea>
+          <textarea codemirror [content]="codemirrorValue?.message"></textarea>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" (click)="accept()">确认</button>
@@ -27,10 +27,9 @@ import { BsModalService, BsModalRef } from "ngx-bootstrap";
     `
 })
 export class NgCodemirrorModalComponent implements OnInit {
-  codemirrorValue: codemirrorModal;
+  codemirrorValue: codemirrorModal = {message:"{}",onAccept:null};
   @ViewChild("codemirrorModal") codemirrorModal;
-  codemirrorValue="{}";
-
+  aa="{name:'aa'}";
   constructor(
     private _ngxCodemirrorModalService: NgxCodemirrorModalService,
     private modalService: BsModalService
@@ -39,14 +38,16 @@ export class NgCodemirrorModalComponent implements OnInit {
   ngOnInit() {
     this._ngxCodemirrorModalService.$confirm.subscribe(codemirrorValue => {
     this.codemirrorModal.show();
-      this.codemirrorValue = codemirrorValue;
+      this.codemirrorModal.onShown.subscribe(()=>{
+        this.codemirrorValue = codemirrorValue;
+      });
+
     });
   }
 
   accept(codemirrorValue: codemirrorModal) {
     this.codemirrorValue.onAccept();
     this.codemirrorModal.hide();
-    this. codemirrorValue="{}";
   }
 
 }
