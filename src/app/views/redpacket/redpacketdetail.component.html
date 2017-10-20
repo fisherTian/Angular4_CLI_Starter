@@ -1,0 +1,140 @@
+<div class="animated fadeIn">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> 订单详情
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <table class="table table-bordered">
+              <thead>
+              <tr>
+                <th>订单编号</th>
+                <th>支付金额</th>
+                <th>创建时间</th>
+                <th>下单请求</th>
+                <th>下单返回结果</th>
+                <th>用户支付返回结果</th>
+                <th>下单时用户账户余额</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngIf="order != null">
+                <td>{{order.code}}</td>
+                <td>{{order.money}}元</td>
+                <td>{{order.createTime | date:'yyyy-MM-dd HH:mm'}}</td>
+                <td>
+                  <span class="badge badge-success curpointer" (click)="viewJson(order.orderRequest);">查看</span>
+                </td>
+                <td>
+                  <span class="badge badge-success curpointer" (click)="viewJson(order.orderResult);">查看</span>
+                </td>
+                <td>
+                  <span class="badge badge-success curpointer" (click)="viewJson(order.payResult);">查看</span>
+                </td>
+                <td>{{order.balance}}元</td>
+              </tr>
+              <tr *ngIf="order == null">
+                <td class="text-center" colspan="9">使用账户余额支付!</td>
+              </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> 返现详情
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <table class="table table-bordered">
+              <thead>
+              <tr>
+                <th>返现金额</th>
+                <th>返现时间</th>
+              </tr>
+              </thead>
+              <tr *ngIf="returnRecord != null">
+                <td>{{returnRecord.money}}元</td>
+                <td>{{returnRecord.createTime | date:'yyyy-MM-dd HH:mm'}}</td>
+              </tr>
+              <tr *ngIf="returnRecord == null">
+                <td style="white-space: nowrap;text-align: center;" colspan="2">无返现记录!</td>
+              </tr>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> 红包回答详情
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-12 text-right">
+              <select name="select" class="form-control queryInput" style="width: 160px;padding-top: 6px;margin-right: 10px;" [(ngModel)]="status">
+                <option value="">请选择</option>
+                <option value="01">回答正确</option>
+                <option value="02">回答错误</option>
+              </select>
+              <input type="text" class="form-control queryInput" [(ngModel)]="query" placeholder="请输入昵称">
+              <button type="button" class="btn btn-primary -mt5" (click)="getRedpacketDetail();">搜索</button>
+            </div>
+          </div>
+          <br>
+          <table class="table table-bordered">
+            <thead>
+            <tr>
+              <th>序号</th>
+              <th>头像</th>
+              <th>回答者</th>
+              <th>答案</th>
+              <th>红包金额</th>
+              <th>回答状态</th>
+              <th>回答时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of redpacketDetailList | paginate: { itemsPerPage: 10, currentPage: page,totalItems: total };let i = index;">
+              <td>{{i+1}}</td>
+              <td><img style="width:38px;height:38px;" [src]="item.portrait"></td>
+              <td>{{item.nickname}}</td>
+              <td>{{item.answer}}</td>
+              <td>{{item.money}}元</td>
+              <td>
+                <span *ngIf="item.status == '01'">回答正确</span>
+                <span *ngIf="item.status == '02'">回答错误</span>
+              </td>
+              <td>{{item.createTime | date:'yyyy-MM-dd HH:mm'}}</td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4 text-center">
+              共 {{total}} 个
+            </div>
+            <div class="col-lg-4">
+              <pagination-controls (pageChange)="pageChanged($event)" nextLabel="下一页" maxSize="5" previousLabel="上一页"></pagination-controls>
+            </div>
+          </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

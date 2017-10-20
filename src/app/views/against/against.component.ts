@@ -37,7 +37,6 @@ export class AgainstComponent implements OnInit{
   };
 
   changeStatus = function(id,status){
-    console.log(11);
     this._ngxConfirmService.confirm({ message: "确认修改状态？", onAccept: () => {
       this.againstService.updateStatus({status:status,id:id}).then(res =>{
         if(res.code ==200 &&res.data){

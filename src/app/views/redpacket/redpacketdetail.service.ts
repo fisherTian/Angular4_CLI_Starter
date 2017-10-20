@@ -3,12 +3,12 @@ import { InterceptorService  } from 'ng2-interceptors';
 import { GoodUtils } from './../../core/utils';
 import { environment } from 'environments/environment';
 @Injectable()
-export class RedpacketlistService {
+export class RedpacketDetaillistService {
 
   constructor(private http: InterceptorService) { }
 
   public get(params) {
-    return this.http.get(environment.API_URL+'/redpacket/listAll?'+GoodUtils.parseParams(params))
+    return this.http.get(environment.API_URL+'/redpacketRecord/listAll?'+GoodUtils.parseParams(params))
       .toPromise()
       .then(response => response.json())
       .catch((error:any) => Promise.reject(error.message || error));

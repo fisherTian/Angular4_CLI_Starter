@@ -7,7 +7,6 @@ import {CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import {NgxConfirmModule} from './../../plugin/ngx-confirm/ngx-confirm.module';
-import { NgxConfirmService } from './../../plugin/ngx-confirm/ngx-confirm.service';
 @NgModule({
   imports: [
     AgainstRoutingModule,CommonModule,Ng2PaginationModule,FormsModule,NgxConfirmModule,
@@ -16,6 +15,6 @@ import { NgxConfirmService } from './../../plugin/ngx-confirm/ngx-confirm.servic
   declarations: [
     AgainstComponent
   ],
-  providers:[NgxConfirmService]
+  providers:[]
 })
 export class AgainstModule { }

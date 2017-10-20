@@ -18,13 +18,19 @@
             <tr>
               <th>序号</th>
               <th>头像</th>
-              <th>昵称</th>
-              <th>国家</th>
-              <th>省</th>
-              <th>市</th>
+              <th>发起人</th>
+              <th>类型</th>
+              <th>单个红包金额</th>
+              <th>支付金额</th>
+              <th>参与人数</th>
+              <th>问题</th>
+              <th>答案</th>
+              <th>提示语</th>
               <th>创建时间</th>
-              <th>登陆时间</th>
-              <th>账户余额</th>
+              <th>失效时间</th>
+              <th>是否返现</th>
+              <th>分享图片</th>
+              <th>操作</th>
             </tr>
             </thead>
             <tbody>
@@ -32,21 +38,38 @@
               <td>{{i+1}}</td>
               <td><img style="width:38px;height:38px;" [src]="item.portrait"></td>
               <td>{{item.nickname}}</td>
-              <td>{{item.country}}</td>
-              <td>{{item.province}}</td>
-              <td>{{item.city}}</td>
-              <td>{{item.createTime | date:'yyyy-MM-dd hh:mm'}}</td>
-              <td>{{item.loginTime | date:'yyyy-MM-dd hh:mm'}}</td>
-              <td >{{item.money}}元</td>
+              <td>
+                <span *ngIf="item.type == '01'">猜金额</span>
+                <span *ngIf="item.type == '02'">回答问题</span>
+              </td>
+              <td>{{item.money}}元</td>
+              <td>{{item.payMoney}}元</td>
+              <td>{{item.places}}/{{item.num}}</td>
+              <td>{{item.question}}</td>
+              <td>{{item.answer}}</td>
+              <td>{{item.remindWords}}</td>
+              <td>{{item.createTime | date:'yyyy-MM-dd HH:mm'}}</td>
+              <td>{{item.invalidTime | date:'yyyy-MM-dd HH:mm'}}</td>
+              <td>
+                <span *ngIf="item.isReturn == '0' && item.places == item.num" class="badge badge-info" >已处理</span>
+                <span *ngIf="item.isReturn == '0' && item.places != item.num" class="badge badge-danger" >未处理</span>
+                <span *ngIf="item.isReturn == '1'" class="badge badge-success" >未处理</span>
+              </td>
+              <td>
+                <span class="badge badge-success curpointer" (click)="viewUrlModal.show();url = item.url;">查看</span>
+              </td>
+              <td>
+                <a class="fa fa-search-plus fa-fw m-r-xs" title="查看详情" [routerLink]="['/redpacket/detail',item.id]"></a>
+              </td>
             </tr>
             </tbody>
           </table>
           <div class="row">
             <div class="col-lg-4"></div>
-            <div class="col-lg-4 text-center">
+            <div class="col-lg-3 text-center">
               共 {{total}} 个
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-5">
               <pagination-controls (pageChange)="pageChanged($event)" nextLabel="下一页" maxSize="5" previousLabel="上一页"></pagination-controls>
             </div>
           </div>
@@ -55,3 +78,24 @@
     </div>
   </div>
 </div>
+
+<div bsModal #viewUrlModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-info" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">分享图片</h4>
+        <button type="button" class="close" (click)="viewUrlModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center">
+          <img *ngIf="url != null " [src]="url" height="360">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" (click)="viewUrlModal.hide()">关闭</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

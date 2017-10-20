@@ -10,6 +10,7 @@ export class RedpacketListComponent implements OnInit{
   page: number = 1;
   total: number;
   query:string;
+  url:string;
 
   constructor(private redpacketlistService:RedpacketlistService) { }
 
