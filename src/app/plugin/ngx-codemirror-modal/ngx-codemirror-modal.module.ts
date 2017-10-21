@@ -6,7 +6,7 @@ import { CodeMirrorModule } from './../ngx-codemirror';
 @NgModule({
   imports: [ModalModule.forRoot(),CodeMirrorModule],
   declarations: [NgCodemirrorModalComponent],
-  providers: [NgxCodemirrorModalService, BsModalService],
+  providers: [NgxCodemirrorModalService],
   exports: [NgCodemirrorModalComponent]
 })
 export class NgCodemirrorModalModule {}

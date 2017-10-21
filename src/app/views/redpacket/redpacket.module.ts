@@ -10,7 +10,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import {NgCodemirrorModalModule} from './../../plugin/ngx-codemirror-modal/ngx-codemirror-modal.module';
 @NgModule({
   imports: [
-    RedpacketRoutingModule,CommonModule,Ng2PaginationModule,FormsModule,ModalModule.forRoot(),NgCodemirrorModalModule
+    RedpacketRoutingModule,CommonModule,Ng2PaginationModule,FormsModule,NgCodemirrorModalModule
   ],
   declarations: [
     RedpacketListComponent,

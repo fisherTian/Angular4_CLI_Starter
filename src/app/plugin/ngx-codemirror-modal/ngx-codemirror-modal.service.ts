@@ -6,9 +6,9 @@ import { codemirrorModal } from "./ngx-codemirror-modal.interface";
 @Injectable()
 export class NgxCodemirrorModalService {
   private codemirrorSubject: Subject<codemirrorModal> = new Subject<codemirrorModal>();
-  public $confirm: Observable<codemirrorModal> = this.codemirrorSubject.asObservable();
+  public $codemirror: Observable<codemirrorModal> = this.codemirrorSubject.asObservable();
 
-  confirm(codemirrorValue: codemirrorModal) {
+  codemirror(codemirrorValue: codemirrorModal) {
     this.codemirrorSubject.next(codemirrorValue);
   }
 }

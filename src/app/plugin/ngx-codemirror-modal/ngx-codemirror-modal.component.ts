@@ -31,12 +31,11 @@ export class NgCodemirrorModalComponent implements OnInit {
   @ViewChild("codemirrorModal") codemirrorModal;
   aa="{name:'aa'}";
   constructor(
-    private _ngxCodemirrorModalService: NgxCodemirrorModalService,
-    private modalService: BsModalService
+    private _ngxCodemirrorModalService: NgxCodemirrorModalService
   ) {}
 
   ngOnInit() {
-    this._ngxCodemirrorModalService.$confirm.subscribe(codemirrorValue => {
+    this._ngxCodemirrorModalService.$codemirror.subscribe(codemirrorValue => {
     this.codemirrorModal.show();
       this.codemirrorModal.onShown.subscribe(()=>{
         this.codemirrorValue = codemirrorValue;
@@ -48,6 +47,11 @@ export class NgCodemirrorModalComponent implements OnInit {
   accept(codemirrorValue: codemirrorModal) {
     this.codemirrorValue.onAccept();
     this.codemirrorModal.hide();
+    this.codemirrorModal.onHidden.subscribe(()=>{
+      let el = document.getElementsByTagName("bs-modal-backdrop")[0];
+      if(el)el.parentNode.removeChild(el);
+    });
+
   }
 
 }
