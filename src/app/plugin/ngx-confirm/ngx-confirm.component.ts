@@ -53,8 +53,13 @@ export class NgConfirmComponent implements OnInit {
     this.confirmValue.onReject();
     this.confirmModal.hide();
     this.confirmModal.onHidden.subscribe(()=>{
-      let el = document.getElementsByTagName("bs-modal-backdrop")[0];
-      if(el)el.parentNode.removeChild(el);
+      let els = document.getElementsByTagName("bs-modal-backdrop");
+      if(els && els.length>0){
+        for (let i=0;i<els.length;i++){
+          els[i].parentNode.removeChild(els[i]);
+        }
+      }
+      document.getElementsByTagName("bs-modal-backdrop").length>0 && document.getElementsByTagName("bs-modal-backdrop")[0].parentNode.removeChild(document.getElementsByTagName("bs-modal-backdrop")[0])
     });
     this.confirmValue = null;
   }

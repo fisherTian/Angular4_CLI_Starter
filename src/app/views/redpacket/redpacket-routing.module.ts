@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { RedpacketListComponent } from './redpacketlist.component';
 import { RedpacketDetailComponent } from './redpacketdetail.component';
+import { OrderComponent } from './order.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,13 @@ const routes: Routes = [
     component: RedpacketDetailComponent,
     data: {
       title: '红包详情'
+    }
+  },
+  {
+    path: 'order',
+    component: OrderComponent,
+    data: {
+      title: '订单详情'
     }
   }
 ];
