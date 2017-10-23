@@ -48,6 +48,11 @@ export const config = {
            url:'/cash/return'
          }
        ]
+     },
+     {
+       name:'广告管理',
+       url:'/advertising/edit',
+       icon:'icon-bell'
      }
    ]
 }

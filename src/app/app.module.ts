@@ -72,6 +72,7 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ModalModule,BsModalService  } from 'ngx-bootstrap/modal';
+
 @NgModule({
   imports: [
     BrowserModule,

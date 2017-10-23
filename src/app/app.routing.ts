@@ -39,6 +39,10 @@ export const routes: Routes = [
       {
         path: 'cash',
         loadChildren: './views/cash/cash.module#CashModule'
+      },
+      {
+        path: 'advertising',
+        loadChildren: './views/advertising/advertising.module#AdModule'
       }
     ]
   },

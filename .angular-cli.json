@@ -21,10 +21,15 @@
         "../node_modules/simple-line-icons/css/simple-line-icons.css",
         "scss/style.scss",
         "../node_modules/ngx-toastr/toastr.css",
-        "../node_modules/codemirror/lib/codemirror.css"
+        "../node_modules/codemirror/lib/codemirror.css",
+        "../node_modules/froala-editor/css/froala_editor.pkgd.min.css",
+        "../node_modules/froala-editor/css/froala_style.min.css"
       ],
       "scripts": [
-        "../node_modules/echarts/dist/echarts.min.js"
+        "../node_modules/echarts/dist/echarts.min.js",
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/froala-editor/js/froala_editor.pkgd.min.js",
+        "../node_modules/froala-editor/js/languages/zh_cn.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
