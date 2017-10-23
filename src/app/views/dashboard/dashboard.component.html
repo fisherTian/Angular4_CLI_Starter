@@ -11,11 +11,11 @@
               <small class="text-muted text-uppercase font-weight-bold">余额</small>
               <div class="mt10"><span class="h4 mb-0">{{accountTotal}}</span><small class="text-muted text-uppercase font-weight-bold">&nbsp;&nbsp;元</small></div>
               <div class="mt10">
-                <button type="button" class="btn btn-success btn-sm">充值详情</button>
+                <button type="button" class="btn btn-success btn-sm" [routerLink]="['/redpacket/order']">充值详情</button>
                 &nbsp;&nbsp;&nbsp;
-                <button type="button" class="btn btn-primary btn-sm">提现详情</button>
+                <button type="button" class="btn btn-primary btn-sm" [routerLink]="['/cash/list']">提现详情</button>
                 &nbsp;&nbsp;&nbsp;
-                <button type="button" class="btn btn-danger btn-sm">返现详情</button>
+                <button type="button" class="btn btn-danger btn-sm" [routerLink]="['/cash/return']">返现详情</button>
               </div>
             </div>
 
