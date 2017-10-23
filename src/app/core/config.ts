@@ -30,6 +30,24 @@ export const config = {
            /*icon:'icon-calculator'*/
          }
        ]
+     },
+     {
+       name:'提现管理',
+       icon:'icon-social-stumbleupon',
+       children:[
+         {
+           name:'提现列表',
+           url:'/cash/list'
+         },
+         {
+           name:'提现订单',
+           url:'/cash/order'
+         },
+         {
+           name:'返现记录',
+           url:'/cash/return'
+         }
+       ]
      }
    ]
 }

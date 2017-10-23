@@ -56,7 +56,7 @@
                 <span *ngIf="item.isReturn == '1'" class="badge badge-success" >未处理</span>
               </td>
               <td>
-                <span class="badge badge-success curpointer" (click)="viewUrlModal.show();url = item.url;">查看</span>
+                <span class="badge badge-success curpointer" (click)="url = item.url;showImg(template);">查看</span>
               </td>
               <td>
                 <a class="fa fa-search-plus fa-fw m-r-xs" title="查看详情" [routerLink]="['/redpacket/detail',item.id]"></a>
@@ -79,23 +79,19 @@
   </div>
 </div>
 
-<div bsModal #viewUrlModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-info" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">分享图片</h4>
-        <button type="button" class="close" (click)="viewUrlModal.hide()" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+<template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">分享图片</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="text-center">
+        <img *ngIf="url != null " [src]="url" height="360">
       </div>
-      <div class="modal-body">
-        <div class="text-center">
-          <img *ngIf="url != null " [src]="url" height="360">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-info" (click)="viewUrlModal.hide()">关闭</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="modalRef.hide()">关闭</button>
+    </div>
+</template>

@@ -35,6 +35,10 @@ export const routes: Routes = [
       {
         path: 'redpacket',
         loadChildren: './views/redpacket/redpacket.module#RedpacketModule'
+      },
+      {
+        path: 'cash',
+        loadChildren: './views/cash/cash.module#CashModule'
       }
     ]
   },

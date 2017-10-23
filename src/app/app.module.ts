@@ -71,6 +71,7 @@ import { AppRoutingModule } from './app.routing';
 // Import 3rd party components
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ModalModule,BsModalService  } from 'ngx-bootstrap/modal';
 @NgModule({
   imports: [
     BrowserModule,
@@ -80,7 +81,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     HttpModule,
     FormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    ModalModule.forRoot()
   ],
   declarations: [
     AppComponent,
@@ -89,7 +91,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     ...APP_COMPONENTS,
     ...APP_DIRECTIVES
   ],
-  providers: [ServerURLInterceptor,ToastrService,
+  providers: [ServerURLInterceptor,ToastrService,BsModalService,
     {
       provide: InterceptorService,
       useFactory: interceptorFactory,

@@ -1,21 +1,20 @@
 import { NgModule } from '@angular/core';
-import { RedpacketListComponent } from './redpacketlist.component';
-import { RedpacketDetailComponent } from './redpacketdetail.component';
+import { ListComponent } from './list.component';
 import { OrderComponent } from './order.component';
 import { Ng2PaginationModule } from 'ng2-pagination';
 // Components Routing
-import { RedpacketRoutingModule } from './redpacket-routing.module';
+import { CashRoutingModule } from './cash-routing.module';
 import {CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CodeMirrorModule } from './../../plugin/ngx-codemirror';
 import {NgCodemirrorModalModule} from './../../plugin/ngx-codemirror-modal/ngx-codemirror-modal.module';
+import { ReturnListComponent } from './return.component';
 @NgModule({
   imports: [
-    RedpacketRoutingModule,CommonModule,Ng2PaginationModule,FormsModule,NgCodemirrorModalModule
+    CashRoutingModule,CommonModule,Ng2PaginationModule,FormsModule,CodeMirrorModule,NgCodemirrorModalModule
   ],
   declarations: [
-    RedpacketListComponent,
-    RedpacketDetailComponent,
-    OrderComponent
+    ListComponent,OrderComponent,ReturnListComponent
   ]
 })
-export class RedpacketModule { }
+export class CashModule { }
