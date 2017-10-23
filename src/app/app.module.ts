@@ -82,8 +82,7 @@ import { ModalModule,BsModalService  } from 'ngx-bootstrap/modal';
     HttpModule,
     FormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
-    ModalModule.forRoot()
+    ToastrModule.forRoot()
   ],
   declarations: [
     AppComponent,

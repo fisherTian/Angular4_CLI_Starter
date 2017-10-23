@@ -1,5 +1,6 @@
 import { Component,OnInit,Output,EventEmitter } from '@angular/core';
 import { AdEditService } from './adedit.service';
+import { environment } from 'environments/environment';
 @Component({
   templateUrl: 'adedit.component.html',
   providers:[AdEditService]
@@ -23,20 +24,21 @@ export class AdEditComponent implements OnInit{
       charCounterCount: true, // 是否开启统计字数
       charCounterMax: -1, // 最大输入字数,目前只支持英文字母
       // 注意导航条的配置, 按照官方的文档,无法配置,只能使用toolbarButtons来配置了。
-      toolbarButtons: ['fullscreen', '|', 'bold', 'italic', 'underline', 'strikeThrough', 'align', 'insertLink', 'insertImage','insertVideo', 'insertHR', 'subscript', 'superscript'],
+      toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'embedly', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'spellChecker', 'help', 'html', '|', 'undo', 'redo'],
       codeMirror: false, // 高亮显示html代码
       codeMirrorOptions: { // 配置html代码参数
         tabSize: 4
       },
-      height: 200,
+      height: 300,
       // 上传图片，视频等稳健配置
-      //imageUploadURL:this.questionListService.IP+"sns/uploadPhoto",//GLOBAL.INCONFIG.getIP()+接口名称,
+      imageUploadURL:environment.API_URL+"/system/qiniu/upload",
       //imageUploadURL:"http://11.177.50.63:9999/emanager/sns/uploadPhoto",//本地路径
       //imageUploadParams:{uid:this.questionListService.userInfo.id},//接口其他传参,默认为空对象{},
      // imageUploadMethod:"POST",//POST/GET,
       // 事件, 每次输入,就将值传递给父组件, 或者使用失去焦点的时候传递。
       events: {
         'froalaEditor.keyup': function (e, editor) {
+          console.log(that.froalaText);
           that.froala.emit(that.froalaText);
           console.log(editor.selection.get());
         }
