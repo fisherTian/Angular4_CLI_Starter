@@ -14,6 +14,8 @@ export class OrderComponent implements OnInit{
   total: number;
   query:string='';
   status:string='';
+  startTime;
+  endTime;
 
   constructor(private orderService:OrderService,private ngxCodemirrorModalService:NgxCodemirrorModalService) { }
 

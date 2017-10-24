@@ -11,7 +11,13 @@ export class DashboardComponent implements OnInit{
   todayIncome:number;
   todaySpend:number;
   todayBalance:number;
+  totalIncome:number;
+  HxtOption;
+  Sztoption;
+  totalBalance:number;
   type='00';
+  totalSpend:number;
+
 
   constructor(private dashBoardService: DashBoardService) { }
 

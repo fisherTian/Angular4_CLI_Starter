@@ -19,7 +19,7 @@ export class AdListComponent implements OnInit{
   public picModalRef: BsModalRef;
   public previewModalRef: BsModalRef;
   url:string='';
-  html:string='';
+  html;
 
   constructor(private adListService:AdListService,private sanitizer: DomSanitizer,private toastr:ToastrService,private modalService:BsModalService,private _ngxConfirmService: NgxConfirmService) { }
 
@@ -46,9 +46,9 @@ export class AdListComponent implements OnInit{
     this.picModalRef = this.modalService.show(template);
   }
 
-  public preview(template: TemplateRef<any>,html) {
+  public preview(template: TemplateRef<any>,_html) {
     this.html = this.sanitizer.bypassSecurityTrustHtml(
-      html);
+      _html);
     this.previewModalRef = this.modalService.show(template);
   }
 

@@ -14,6 +14,8 @@ export class RedpacketDetailComponent implements OnInit{
   query:string;
   status:string='';
   id:number;
+  order;
+  returnRecord;
 
   constructor(private redpacketDetailService:RedpacketDetaillistService,private route:ActivatedRoute,private ngxCodemirrorModalService:NgxCodemirrorModalService ) { }
 
