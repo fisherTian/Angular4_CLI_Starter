@@ -51,7 +51,7 @@ export const config = {
      },
      {
        name:'广告管理',
-       url:'/advertising/edit',
+       url:'/advertising/list',
        icon:'icon-bell'
      }
    ]

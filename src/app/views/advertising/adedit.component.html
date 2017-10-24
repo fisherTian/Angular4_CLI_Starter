@@ -1,3 +1,88 @@
 <div class="animated fadeIn">
-  <div [froalaEditor]="option" [(froalaModel)]="froalaText"></div>
+  <div class="row">
+
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-header">
+          <strong>广告内容</strong>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label for="title">标题：</label>
+                <input type="text" class="form-control" [(ngModel)]="title" id="title" placeholder="请输入标题">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label >图片：</label>
+                <div class="input-group">
+                  <input type="text" id="input2-group2" [(ngModel)]="url" name="input2-group2" class="form-control" placeholder="图片地址" disabled>
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-primary" (click)="uploadImg();">上传图片</button>
+                  </span>
+                </div>
+                <img [(src)]="url" height="180px">
+                <input type="file" id="uploadImg" style="display:none;" ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged($event)" />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label>广告内容：</label>
+                <div [froalaEditor]="option" [(froalaModel)]="froalaText"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="card-footer text-right">
+          <button class="btn btn-sm btn-primary" (click)="save();">保存</button>
+          <button class="btn btn-sm btn-success" (click)="preview();">预览</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="mobile-simulator">
+            <div class="white-bac" [innerHTML]="html"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
 </div>
+<style>
+  .mobile-simulator {
+    width: 281px;
+    height: 583px;
+    background: url(assets/img/mobile-simulator.png) no-repeat;
+    background-size: contain;
+    margin: 15px auto;
+    position: relative;
+    padding-top: 99px;
+  }
+
+  .white-bac {
+    height: 438px;
+    width: 100%;
+    background-color: #fff;
+    padding: 0 1px;
+  }
+  .fileImg{
+    max-width:255px;
+  }
+  .white-bac img {
+    max-width: 100%
+  }
+</style>

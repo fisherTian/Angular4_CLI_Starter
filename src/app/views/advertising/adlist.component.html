@@ -1,0 +1,137 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> 广告列表
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-12 text-right">
+              <button type="button" [routerLink]="['/advertising/edit/null']" class="btn btn-success -mt5 pull-left">新增</button>
+              状态：
+              <select name="select" class="form-control queryInput" style="padding-top: 6px;height: 35px;" [ngModel]="status" (ngModelChange)="status=$event;">
+                <option value="">请选择</option>
+                <option value="00">未发布</option>
+                <option value="01">已发布</option>
+              </select>
+              &nbsp;&nbsp;
+              <input type="text" class="form-control queryInput" [(ngModel)]="query" placeholder="请输入标题">
+              <button type="button" class="btn btn-primary -mt5" (click)="getAdList();">搜索</button>
+            </div>
+          </div>
+          <br>
+          <table class="table table-bordered">
+            <thead>
+            <tr>
+              <th>序号</th>
+              <th>标题</th>
+              <th>图片</th>
+              <th>状态</th>
+              <th>预览</th>
+              <th>创建时间</th>
+              <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of adList | paginate: { itemsPerPage: 10, currentPage: page,totalItems: total };let i = index;">
+              <td>{{i+1}}</td>
+              <td>{{item.title}}</td>
+              <td>
+                <span class="badge badge-success curpointer" (click)="showImg(picTpl,item.url);">查看</span>
+              </td>
+              <td>
+                <span *ngIf="item.status == '01'" class="badge badge-success curpointer" (click)="changeStatus(item.id,'00');">已发布</span>
+                <span *ngIf="item.status == '00'" class="badge badge-danger curpointer" (click)="changeStatus(item.id,'01');">未发布</span>
+              </td>
+              <td>
+                <span class="badge badge-success curpointer" (click)="preview(previewTpl,item.html);">查看</span>
+              </td>
+              <td>{{item.createTime | date:'yyyy-MM-dd HH:mm'}}</td>
+              <td>
+                <a class="fa fa-pencil fa-fw m-r-xs" title="修改" [routerLink]="['/advertising/edit',item.id]"></a>
+                <a class="fa fa-times fa-fw m-r-xs" title="删除" (click)="deleteAd(item.id);"></a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-3 text-center">
+              共 {{total}} 个
+            </div>
+            <div class="col-lg-5">
+              <pagination-controls (pageChange)="pageChanged($event)" nextLabel="下一页" maxSize="5" previousLabel="上一页"></pagination-controls>
+            </div>
+          </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<template #picTpl>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">封面图片</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="picModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="text-center">
+      <img *ngIf="url != null " [src]="url" style="max-width:360px;">
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="picModalRef.hide()">关闭</button>
+  </div>
+</template>
+
+<template #previewTpl>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">手机预览</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="previewModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" style="background: #E4E5E6;">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="mobile-simulator">
+          <div class="white-bac" [innerHTML]="html"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="previewModalRef.hide()">关闭</button>
+  </div>
+</template>
+
+<ngx-confirm></ngx-confirm>
+
+
+<style>
+  .mobile-simulator {
+    width: 281px;
+    height: 583px;
+    background: url(assets/img/mobile-simulator.png) no-repeat;
+    background-size: contain;
+    margin: 15px auto;
+    position: relative;
+    padding-top: 99px;
+  }
+
+  .white-bac {
+    height: 438px;
+    width: 100%;
+    background-color: #fff;
+    padding: 0 1px;
+  }
+  .fileImg{
+    max-width:255px;
+  }
+  .white-bac img {
+    max-width: 100%
+  }
+</style>
