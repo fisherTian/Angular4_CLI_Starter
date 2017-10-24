@@ -1,17 +1,15 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild,TemplateRef } from "@angular/core";
 import { Confirm } from "./confirm.interface";
 import { NgxConfirmService } from "./ngx-confirm.service";
-import { BsModalService, BsModalRef } from "ngx-bootstrap";
-
+import { BsModalService  } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 @Component({
   selector: "ngx-confirm",
   template: `
-    <div bsModal #confirmModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirmModal" aria-hidden="true">
-    <div class="modal-dialog modal-info modal-sm">
-      <div class="modal-content">
+    <template #confirmTpl>
         <div class="modal-header">
           <h4 class="modal-title pull-left">确认框</h4>
-          <button type="button" class="close pull-right" aria-label="Close" (click)="confirmModal.hide();">
+          <button type="button" class="close pull-right" aria-label="Close" (click)="confirmModalRef.hide();">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -22,14 +20,13 @@ import { BsModalService, BsModalRef } from "ngx-bootstrap";
           <button type="button" class="btn btn-primary" (click)="accept()">确认</button>
           <button type="button" class="btn btn-danger" (click)="reject()">取消</button>
       </div>
-      </div>
-    </div>
-  </div>
+    </template>
     `
 })
 export class NgConfirmComponent implements OnInit {
+  public confirmModalRef: BsModalRef;
   confirmValue: Confirm;
-  @ViewChild("confirmModal") confirmModal;
+  @ViewChild("confirmTpl") confirmTpl;
 
   constructor(
     private _confirmService: NgxConfirmService,
@@ -37,22 +34,26 @@ export class NgConfirmComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this._confirmService.$confirm.subscribe(confirmValue => {
-    this.confirmModal.show();
+    if(this._confirmService.$confirm)this._confirmService.$confirm.subscribe(confirmValue => {
+      this.confirmModalRef = this.modalService.show(this.confirmTpl,{class: 'modal-sm modal-info'});
       this.confirmValue = confirmValue;
     });
   }
 
+  ngOnDestroy(){
+    this._confirmService.$confirm = null;
+  }
+
   accept(confirmValue: Confirm) {
     this.confirmValue.onAccept();
-    this.confirmModal.hide();
+    this.confirmModalRef.hide();
     this.confirmValue = null;
   }
 
   reject() {
     this.confirmValue.onReject();
-    this.confirmModal.hide();
-    this.confirmModal.onHidden.subscribe(()=>{
+    this.confirmModalRef.hide();
+    /*this.confirmModal.onHidden.subscribe(()=>{
       let els = document.getElementsByTagName("bs-modal-backdrop");
       if(els && els.length>0){
         for (let i=0;i<els.length;i++){
@@ -60,7 +61,7 @@ export class NgConfirmComponent implements OnInit {
         }
       }
       document.getElementsByTagName("bs-modal-backdrop").length>0 && document.getElementsByTagName("bs-modal-backdrop")[0].parentNode.removeChild(document.getElementsByTagName("bs-modal-backdrop")[0])
-    });
+    });*/
     this.confirmValue = null;
   }
 }

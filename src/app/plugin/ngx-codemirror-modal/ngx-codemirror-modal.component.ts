@@ -6,9 +6,7 @@ import { BsModalService, BsModalRef } from "ngx-bootstrap";
 @Component({
   selector: "ngx-codemirror-modal",
   template: `
-    <div bsModal #codemirrorModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="codemirrorModal" aria-hidden="true">
-    <div class="modal-dialog modal-info">
-      <div class="modal-content">
+    <template #codemirrorTpl>
         <div class="modal-header">
           <h4 class="modal-title pull-left">数据详情</h4>
           <button type="button" class="close pull-right" aria-label="Close" (click)="codemirrorModal.hide();">
@@ -21,33 +19,37 @@ import { BsModalService, BsModalRef } from "ngx-bootstrap";
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" (click)="accept()">确认</button>
       </div>
-      </div>
-    </div>
-  </div>
+    </template>
     `
 })
 export class NgCodemirrorModalComponent implements OnInit {
   codemirrorValue: codemirrorModal = {message:"{}",onAccept:null};
-  @ViewChild("codemirrorModal") codemirrorModal;
-  aa="{name:'aa'}";
+  @ViewChild("codemirrorTpl") codemirrorTpl;
+  public codemirrorModalRef: BsModalRef;
   constructor(
-    private _ngxCodemirrorModalService: NgxCodemirrorModalService
+    private _ngxCodemirrorModalService: NgxCodemirrorModalService,
+    private modalService: BsModalService
   ) {}
 
   ngOnInit() {
-    this._ngxCodemirrorModalService.$codemirror.subscribe(codemirrorValue => {
-    this.codemirrorModal.show();
-      this.codemirrorModal.onShown.subscribe(()=>{
-        this.codemirrorValue = codemirrorValue;
-      });
+    if(this._ngxCodemirrorModalService.$codemirror)this._ngxCodemirrorModalService.$codemirror.subscribe(codemirrorValue => {
+      this.codemirrorModalRef = this.modalService.show(this.codemirrorTpl,{class: 'modal-info'});
+      this.codemirrorValue = codemirrorValue;
+      // this.codemirrorModal.onShown.subscribe(()=>{
+      //
+      // });
 
     });
   }
 
+  ngOnDestroy(){
+    this._ngxCodemirrorModalService.$codemirror = null;
+  }
+
   accept(codemirrorValue: codemirrorModal) {
     this.codemirrorValue.onAccept();
-    this.codemirrorModal.hide();
-    this.codemirrorModal.onHidden.subscribe(()=>{
+    this.codemirrorModalRef.hide();
+    /*this.codemirrorModal.onHidden.subscribe(()=>{
       let els = document.getElementsByTagName("bs-modal-backdrop");
       if(els && els.length>0){
         for (let i=0;i<els.length;i++){
@@ -55,7 +57,7 @@ export class NgCodemirrorModalComponent implements OnInit {
         }
       }
       document.getElementsByTagName("bs-modal-backdrop").length>0 && document.getElementsByTagName("bs-modal-backdrop")[0].parentNode.removeChild(document.getElementsByTagName("bs-modal-backdrop")[0])
-    });
+    });*/
 
   }
 
