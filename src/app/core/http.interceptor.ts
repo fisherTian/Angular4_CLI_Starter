@@ -14,8 +14,16 @@ export class ServerURLInterceptor implements Interceptor {
     return request;
   }
   public interceptAfter(response: InterceptedResponse): InterceptedResponse {
+
     if(response.response.status == 403){
-      this.router.navigate(['/login']);
+      if(response.response.url.indexOf("against/againstUnDealCount") > 0){
+
+      }else{
+        let that = this;
+        setTimeout(function(){
+          that.router.navigate(['/login']);
+        },500);
+      }
     };
     return response;
   }
